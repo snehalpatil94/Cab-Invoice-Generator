@@ -13,6 +13,11 @@ package com.bl.cabinvoicegenerator;
  * Step 2 :- Multiple Ride
  * - The invoice generator should now take in multiple rides, and calculate the aggregate
  * total for all
+ * Step 3 :- Enhanced Invoice
+ * - The invoice generator should now return the following as a part of the invoice-
+ * - Total Number Of Rides
+ * - Total Fare
+ * - Average Fare Per Ride
  *
  * @author : Snehal Patil
  */
@@ -57,6 +62,21 @@ public class CabInvoiceGenerator {
             totalFare = CalculateFare(ride.getDistance(), ride.getTime());
         }
         return totalFare;
+    }
+
+    /**
+     *Creating a parameterized method name as InvoiceSummary
+     * Take a multiple ride and calculate the aggregate total for all
+     *
+     * @param rides
+     * @return total rides and total fare
+     */
+    public InvoiceSummary invoiceSummaryCalculation(Ride[] rides) {
+        double totalFare = 0.0;
+        for (Ride ride : rides) {
+            totalFare += CalculateFare((ride.getDistance()), ride.getTime());
+        }
+        return new InvoiceSummary(rides.length, totalFare);
     }
 
     public static void main(String[] args) {
