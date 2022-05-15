@@ -10,6 +10,9 @@ package com.bl.cabinvoicegenerator;
  * - Given Distance and time the invoice generator should return the total fare of journey
  * - Cost Rs.10 per KM + Rs.1 per minute.
  * -Minimum Fare - Rs.5
+ * Step 2 :- Multiple Ride
+ * - The invoice generator should now take in multiple rides, and calculate the aggregate
+ * total for all
  *
  * @author : Snehal Patil
  */
@@ -37,6 +40,21 @@ public class CabInvoiceGenerator {
          */
         if (totalFare < MIN_FARE) {
             return MIN_FARE;
+        }
+        return totalFare;
+    }
+
+    /**
+     * Creating a parameterized method name as calculateFareForMultipleRides
+     * Take a multiple ride and calculate the aggregate total for all
+     *
+     * @param rides multiple ride
+     * @return total fare
+     */
+    public double calculateFareForMultipleRides(Ride[] rides) {
+        double totalFare = 0.0;
+        for (Ride ride : rides) {
+            totalFare = CalculateFare(ride.getDistance(), ride.getTime());
         }
         return totalFare;
     }
