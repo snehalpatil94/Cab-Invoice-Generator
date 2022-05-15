@@ -37,4 +37,16 @@ public class CabInvoiceGeneratorTest {
         double totalFare = invoiceService.calculateFareForMultipleRides(rides);
         Assert.assertEquals(260, totalFare, 0);
     }
+
+    // ------------------------- Test for Invoice Summery---------------------------
+    @Test
+    public void givenMultipleRides_ShouldReturnInvoiceSummary() {
+        Ride[] rides = {new Ride(2.0, 5),
+                new Ride(0.1, 1),
+        };
+        CabInvoiceGenerator invoiceService = new CabInvoiceGenerator();
+        InvoiceSummary invoiceSummary = invoiceService.invoiceSummaryCalculation(rides);
+        InvoiceSummary expectedInvoices = new InvoiceSummary(2, 30.0);
+        Assert.assertEquals(expectedInvoices.getInvoiceSummary(), invoiceSummary.getInvoiceSummary());
+    }
 }
