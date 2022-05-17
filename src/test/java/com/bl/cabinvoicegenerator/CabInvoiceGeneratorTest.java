@@ -11,7 +11,7 @@ public class CabInvoiceGeneratorTest {
         CabInvoiceGenerator invoiceService = new  CabInvoiceGenerator();
         double distance = 2.0;
         int time = 5;
-        double totalFare = invoiceService.CalculateFare(distance, time);
+        double totalFare = invoiceService.calculateFare(distance, time);
         Assert.assertEquals(25, totalFare,0);
     }
 
@@ -21,7 +21,7 @@ public class CabInvoiceGeneratorTest {
         CabInvoiceGenerator invoiceService = new  CabInvoiceGenerator();
         double distance = 0.1;
         int time = 1;
-        double totalFare = invoiceService.CalculateFare(distance, time);
+        double totalFare = invoiceService.calculateFare(distance, time);
         Assert.assertEquals(5.0, totalFare,0);
     }
 
@@ -47,6 +47,15 @@ public class CabInvoiceGeneratorTest {
         CabInvoiceGenerator invoiceService = new CabInvoiceGenerator();
         InvoiceSummary invoiceSummary = invoiceService.invoiceSummaryCalculation(rides);
         InvoiceSummary expectedInvoices = new InvoiceSummary(2, 30.0);
+        Assert.assertEquals(expectedInvoices.getInvoiceSummary(), invoiceSummary.getInvoiceSummary());
+    }
+
+    // ------------------- Test for Invoice summery when given ID-------------------
+    @Test
+    public void givenUserId_ShouldReturnInvoiceSummary() {
+        CabInvoiceGenerator invoiceService = new CabInvoiceGenerator();
+        InvoiceSummary invoiceSummary = invoiceService.getInvoice(1);
+        InvoiceSummary expectedInvoices = new InvoiceSummary(2, 30);
         Assert.assertEquals(expectedInvoices.getInvoiceSummary(), invoiceSummary.getInvoiceSummary());
     }
 }
